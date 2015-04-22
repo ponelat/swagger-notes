@@ -1,0 +1,45 @@
+{
+
+  "swagger" : "2.0",
+  "basePath" : "/app/api",
+  "info": {
+    "title": "Test",
+    "version": "0.0.0"
+  },
+  "definitions" : {
+    "Test" : {
+      "properties" : {
+        "stringTest" : {
+          "type" : "string"
+        },
+        "integerTest" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "doubleTest" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "booleanTest" : {
+          "type" : "boolean"
+        }
+      }
+    }
+  },
+  "paths" : {
+    "/test" : {
+      "get" : {
+        "tags" : [ "test" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description": "Test",
+            "schema" : {
+              "$ref" : "#/definitions/Test"
+            }
+          }
+        }
+      }
+    }
+  }
+}
