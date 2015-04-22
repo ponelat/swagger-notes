@@ -1,0 +1,47 @@
+{
+    "host": "petstore.swagger.wordnik.com",
+    "info": {
+        "title": "Test Spec",
+        "version": "1.0.0"
+    },
+    "definitions": {
+      "test": {
+        "properties": {
+            "Favorite": {
+                "type": "boolean"
+            }
+        },
+        "type": "object"
+      }
+    },
+    "paths": {
+        "/companies/{id}": {
+            "patch": {
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer"
+                    },
+                    {
+                        "in": "body",
+                        "name": "josh",
+                        "schema": {
+                          "$ref": "#/definitions/test"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                },
+                "summary": "Update a company",
+                "tags": [
+                    "companies"
+                ]
+            }
+        }
+    },
+    "swagger": "2.0"
+}

@@ -1,0 +1,25 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: Test Spec
+host: petstore.swagger.wordnik.com
+paths:
+  /companies/{id}:
+      patch:
+        parameters:
+          - name: id
+            type: integer
+            in: path
+          - name: company
+            in: body
+            schema:
+              type: object
+              properties:
+                Favorite:
+                  type: boolean
+
+        summary: Update a company
+        responses:
+            200:
+              description: Successful response
+        tags: [companies]

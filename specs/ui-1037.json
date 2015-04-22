@@ -1,0 +1,48 @@
+{
+  "swagger": "2.0",
+  "host": "petstore.swagger.wordnik.com",
+  "info": {
+      "title": "Test Spec",
+      "version": "1.0.0"
+  },
+  "definitions": {
+    "TestModel": {
+      "properties": {
+        "foo": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "paths": {
+      "/road": {
+          "get": {
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "josh",
+                      "required":false,
+                      "schema":{
+                         "type":"array",
+                         "items":{
+                            "$ref":"#/definitions/TestModel"
+                         }
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "schema":{
+                         "type":"array",
+                         "items":{
+                            "$ref":"#/definitions/TestModel"
+                         }
+                      }
+                  }
+              },
+              "summary": "Something cool"
+          }
+      }
+  }
+}

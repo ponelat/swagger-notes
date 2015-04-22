@@ -1,0 +1,42 @@
+{
+    "swagger": "2.0",
+    "host": "petstore.swagger.wordnik.com",
+    "info": {
+        "title": "Test Spec",
+        "version": "1.0.0"
+    },
+    "paths": {
+      "/companies/{id}": {
+        "patch": {
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "type": "integer"
+            },
+            {
+              "in": "body",
+              "name": "company",
+              "schema": {
+                "properties": {
+                  "Favorite": {
+                    "type": "boolean"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "desription": "Successful response"
+            }
+          },
+          "summary": "Update a company",
+          "tags": [
+            "companies"
+          ]
+        }
+      }
+    }
+}

@@ -1,0 +1,54 @@
+{
+    "definitions": {
+        "Project": {
+            "properties": {
+                "id": {
+                    "description": "Unique project identifyer",
+                    "type": "string"
+                },
+                "isActive": {
+                    "description": "Is this an active project?",
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "Project name",
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "description": "Just to demonstrate a bug with non-requiered boolean values",
+        "title": "Bug Demonstration",
+        "version": "0.0.0"
+    },
+    "paths": {
+        "/projects": {
+            "get": {
+                "description": "Get a list of `Porject` objects.",
+                "parameters": [
+                    {
+                        "description": "filter active vs non-active projects",
+                        "in": "query",
+                        "name": "isActive",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Project"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "List all projects"
+            }
+        }
+    },
+    "swagger": "2.0"
+}
