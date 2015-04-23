@@ -1,35 +1,24 @@
-
+* Notes
 ** Suggestions
-   - [ ] Put in a npm-shrinkwrap file, for supporting the build process in
-         previous tags
-   - [ ] Refactor .gitattributes to focus on text files, as apposed to
-         manually setting files as binary.
+- [ ] Put in a npm-shrinkwrap file, for supporting the build process in
+     previous tags
+- [ ] Refactor .gitattributes to focus on text files, as apposed to
+     manually setting files as binary.
+- [ ] Allow inline specs in swagger-ui, for testing mostly.
 
+- [ ] Use expect.js and sinon in tests
+- [ ] Why are tags and npm version out of sync/wack? for instance currently
+      we're working on swagger-js@2.1.3-M1 but we have a tag for v2.1.9-M1 ??
 ** Small fixes
-   - [ ] Typos in spec file https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md
-         -
+- [ ] Typos in spec file https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md
+     -
+- [ ] Offline use of valiadtor badge, in swagger-ui
 
-
-   - [ ] Offline use of valiadtor badge, in swagger-ui
-
-*** Issue specific notes
-**** Swagger UI #1037
-       (latest: 82a89a7952af62c1cce3d1b946507051c1cd5ea8)
-     - swagger-ui@2.1.0-M1 doesn't render correctly (doesn't even render the 'Array' part)
-     - swagger-ui@2.1.4-M1 doesn't render correctly, does render Array part
-     - swagger-ui@2.1.2-M1 doesn't render correctly, doesn't show Array part
-     - latest has a preferred output in the response model rendering,
-       of petstore#/pet/findPetByStatus
-     - #!/user/createUsersWithArrayInput, shows incorrect behaviour in
-      parameter 'Data Type': Array[#/definitions/User]
-
-*** Reference
-    - new Operation (parent, scheme, operationId, httpMethod, path, args, definitions, models, clientAuthorizations)
+** Ideas
 *** Awesome debugger of specs and -UI
     - [ ] Show -UI and -JS version
     - [ ] Allow inline specs, yaml and json
     - [ ] Allow jumping to a specific tagged version of -UI, whoa!
-** Ideas
 *** SwagLife - a map of the swagger eco-system
     - With elastic search into github issues and PRs
       ... or just jump to one?
@@ -40,3 +29,14 @@
     - Access to online tools, editor.swagger.io, codegen.swagger,
       petstore.swagger, validation, yml2json, more?
     - Shout out to community projects, share the love!
+    - Build it from the start on the greensock engine
+** Reference
+  - new Operation (parent, scheme, operationId, httpMethod, path, args, definitions, models, clientAuthorizations)
+
+** PR checklist:
+  - Is the issue resolved?
+  - Does it have tests?
+  - Have you built the files?
+  - Linted them?
+  - Is the issue resolved?
+
