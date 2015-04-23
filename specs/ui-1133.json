@@ -5,6 +5,17 @@
         "title": "Test Spec",
         "version": "1.0.0"
     },
+    "definitions": {
+
+      "TestModel": {
+        "properties": {
+          "Favorite": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      }
+    },
     "paths": {
       "/companies/{id}": {
         "patch": {
@@ -12,7 +23,9 @@
             {
               "in": "path",
               "name": "id",
-              "type": "integer"
+              "schema": {
+                "$ref": "#/definitions/TestModel"
+              }
             },
             {
               "in": "body",
