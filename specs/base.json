@@ -1,0 +1,37 @@
+{
+  "swagger": "2.0",
+  "host": "petstore.swagger.wordnik.com",
+  "info": {
+      "title": "swagger-ui#1234",
+      "title": "Describe your issue here",
+      "version": "1.0.0"
+  },
+  "paths": {
+      "/road": {
+          "get": {
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "josh",
+                      "schema": {
+                        "properties": {
+                            "Favorite": {
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                       "schema": {
+                        "type": "string"
+                      }
+                  }
+              }
+          }
+      }
+  }
+}
