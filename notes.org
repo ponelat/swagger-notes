@@ -19,6 +19,7 @@
     - [ ] Show -UI and -JS version
     - [ ] Allow inline specs, yaml and json
     - [ ] Allow jumping to a specific tagged version of -UI, whoa!
+    - [ ] A library of specs, uploaded like gists
 *** SwagLife - a map of the swagger eco-system
     - With elastic search into github issues and PRs
       ... or just jump to one?
@@ -30,8 +31,11 @@
       petstore.swagger, validation, yml2json, more?
     - Shout out to community projects, share the love!
     - Build it from the start on the greensock engine
+
 ** Reference
   - new Operation (parent, scheme, operationId, httpMethod, path, args, definitions, models, clientAuthorizations)
+
+  - Swagger specs: http://petstore.swagger.io/v2/swagger.json  , http://petstore.swagger.io/api/api-docs
 
 ** PR checklist:
   - Is the issue resolved?
