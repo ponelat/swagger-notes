@@ -1,0 +1,6 @@
+" This is the Swagger vim component, to help do some grunt work...
+" Just add a Session.vim file to dir you're working in, and make sure it
+" sources this file...
+" source ~/projects/swagger-notes/Session.vim
+
+map ,v :w\|:!swagger-tools validate %<cr>
