@@ -1,0 +1,49 @@
+{
+    "apiVersion": "1.0.0",
+    "apis": [
+        {
+            "description": "Operations about pets",
+            "path": "http://localhost:3000/s/v1online/pets.json"
+        },
+        {
+            "description": "Operations about user",
+            "path": "http://localhost:3000/s/v1online/user.json"
+        },
+        {
+            "description": "Operations about store",
+            "path": "http://localhost:3000/s/v1online/store.json"
+        }
+    ],
+    "authorizations": {
+        "oauth2": {
+            "grantTypes": {
+                "implicit": {
+                    "loginEndpoint": {
+                        "url": "http://petstore.swagger.io/api/oauth/dialog"
+                    },
+                    "tokenName": "access_token"
+                }
+            },
+            "scopes": [
+                {
+                    "description": "Modify pets in your account",
+                    "scope": "write:pets"
+                },
+                {
+                    "description": "Read your pets",
+                    "scope": "read:pets"
+                }
+            ],
+            "type": "oauth2"
+        }
+    },
+    "info": {
+        "contact": "apiteam@wordnik.com",
+        "description": "This is a sample server Petstore server.  You can find out more about Swagger \n    at <a href=\"http://swagger.io\">http://swagger.io</a> or on irc.freenode.net, #swagger.  For this sample,\n    you can use the api key \"special-key\" to test the authorization filters",
+        "license": "Apache 2.0",
+        "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0.html",
+        "termsOfServiceUrl": "http://helloreverb.com/terms/",
+        "title": "Swagger Sample App"
+    },
+    "swaggerVersion": "1.2"
+}
