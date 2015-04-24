@@ -1,0 +1,43 @@
+
+{
+  "swagger": "2.0",
+  "host": "petstore.swagger.wordnik.com",
+  "info": {
+      "title": "swagger-ui#1183",
+      "title": "string/date-time should render default value of an ISO formatted datetime",
+      "version": "1.0.0"
+  },
+  "definitions": {
+    "TestModel": {
+      "type": "object",
+      "properties": {
+        "when": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "paths": {
+      "/road": {
+          "get": {
+              "parameters": [
+                  {
+                      "in": "body",
+                      "schema": {
+                        "$ref": "#/definitions/TestModel"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                       "schema": {
+                        "type": "string"
+                      }
+                  }
+              }
+          }
+      }
+  }
+}

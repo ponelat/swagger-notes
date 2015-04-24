@@ -1,0 +1,54 @@
+{
+  "swagger": "2.0",
+  "host": "petstore.swagger.wordnik.com",
+  "info": {
+      "title": "Showing off some parameter models",
+      "description": "",
+      "version": "1.0.0"
+  },
+  "definitions": {
+    "TestModel": {
+      "properties": {
+        "just_a_prop": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "paths": {
+      "/road": {
+          "get": {
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "refSchema",
+                      "schema": {
+                        "$ref": "#/definitions/TestModel"
+                      }
+                  },
+                  {
+                      "in": "body",
+                      "name": "inlineSchema",
+                      "schema": {
+                        "properties": {
+                            "just_a_prop": {
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                       "schema": {
+                        "type": "string"
+                      }
+                  }
+              }
+          }
+      }
+  }
+}

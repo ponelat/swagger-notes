@@ -1,0 +1,37 @@
+
+{
+  "swagger": "2.0",
+  "host": "petstore.swagger.wordnik.com",
+  "info": {
+      "title": "Test Spec",
+      "version": "1.0.0"
+  },
+  "paths": {
+      "/road": {
+          "get": {
+              "parameters": [
+                  {
+                      "in": "query",
+                      "name": "josh",
+                      "type": "string",
+                      "enum": ["hello", "bob"]
+                  },
+                  {
+                      "in": "query",
+                      "name": "bob",
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Successful response"
+                  }
+              },
+              "summary": "Something cool"
+          }
+      }
+  }
+}
