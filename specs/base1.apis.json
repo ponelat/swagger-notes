@@ -5,6 +5,7 @@
             "path": "/pet",
             "operations": [
                 {
+                   "type": "TestModel",
                     "summary": "Add a new pet to the store",
                     "consumes": [
                         "application/json"
@@ -18,7 +19,7 @@
                             "description": "My one good parameter",
                             "name": "body",
                             "paramType": "body",
-                            "type": "Test"
+                            "type": "TestModel"
                         }
                     ],
                     "responseMessages": [
