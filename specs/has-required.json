@@ -1,0 +1,69 @@
+{
+  "swagger": "2.0",
+  "host": "petstore.swagger.wordnik.com",
+  "info": {
+      "title": "swagger-ui#1234",
+      "title": "Describe your issue here",
+      "version": "1.0.0"
+  },
+  "paths": {
+      "/road": {
+          "get": {
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "josh",
+                      "schema": {
+                        "$ref": "#/definitions/TestModel"
+                      }
+                  }
+              ],
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "bob",
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "yes": {
+                            "type": "string",
+                            "required": true
+                          }
+                        }
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                       "schema": {
+                        "type": "string"
+                      }
+                  }
+              }
+          }
+      }
+  },
+  "definitions": {
+    "TestModel": {
+      "properties": {
+        "maybe": {
+          "type": "string",
+          "required": false
+        },
+        "anothe_possible": {
+          "type": "string",
+          "required": false
+        },
+        "yes": {
+          "type": "string",
+          "required": true
+        },
+        "definitely": {
+          "type": "number",
+          "required": true
+        }
+      }
+    }
+  }
+}

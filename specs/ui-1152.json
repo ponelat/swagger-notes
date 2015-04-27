@@ -1,0 +1,18 @@
+{
+    "apiVersion": "1.0.0",
+    "swaggerVersion": "1.2",
+    "apis": [
+        {
+            "description": "Operations about store",
+            "path": "http://localhost:3000/s/ui-1152.apis.json"
+        }
+    ],
+    "authorizations": { },
+    "info": {
+        "description": "Simplest v1.2 spec",
+        "license": "Apache 2.0",
+        "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0.html",
+        "termsOfServiceUrl": "http://helloreverb.com/terms/",
+        "title": "Testing"
+    }
+}
