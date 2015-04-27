@@ -35,6 +35,21 @@
                         }
                     ]
 
+                },
+                {
+                    "summary": "parameter of type 'void' == undefined",
+                    "method": "PUT",
+                    "nickname": "something",
+                    "notes": "A note",
+                    "parameters": [
+                        {
+                            "description": "type 'void' here == undefined",
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "void"
+                        }
+                    ]
+
                 }
             ]
         }
