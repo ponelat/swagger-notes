@@ -44,3 +44,8 @@
   - Linted them?
   - Is the issue resolved?
 
+
+** How to manipulate the swagger-client from swagger-ui
+   - SwaggerUI returns instance with swaggerUI#api which is an instance of
+     SwaggerClient.
+   - swaggerClient#build contructs from spec
