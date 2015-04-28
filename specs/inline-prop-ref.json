@@ -1,0 +1,111 @@
+{
+    "definitions": {
+        "media_experiment": {
+            "properties": {
+                "custom_array": {
+                    "items": {
+                        "properties": {
+                            "bar": {
+                                "type": "string"
+                            },
+                            "foo": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "media_array": {
+                    "items": {
+                        "description": "Media model",
+                        "properties": {
+                            "caption": {
+                                "description": "Media's caption",
+                                "type": "string"
+                            },
+                            "description": {
+                                "description": "Media's description",
+                                "type": "string"
+                            },
+                            "id": {
+                                "description": "Media's id",
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "name": {
+                                "description": "Media's name",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "id"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "media_file": {
+                    "properties": {
+                        "base64": {
+                            "type": "string"
+                        },
+                        "file_type": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "media_ids": {
+                    "items": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "src": {
+                    "type": "string"
+                }
+            },
+            "required": [],
+            "type": "object"
+        }
+    },
+    "host": "petstore.swagger.wordnik.com",
+    "info": {
+        "title": "Describe your issue here",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/road": {
+            "get": {
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "properties": {
+                                "media": {
+                                    "$ref": "#/definitions/media_experiment"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0"
+}
