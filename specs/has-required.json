@@ -18,21 +18,6 @@
                       }
                   }
               ],
-              "parameters": [
-                  {
-                      "in": "body",
-                      "name": "bob",
-                      "schema": {
-                        "type": "object",
-                        "properties": {
-                          "yes": {
-                            "type": "string",
-                            "required": true
-                          }
-                        }
-                      }
-                  }
-              ],
               "responses": {
                   "200": {
                       "description": "Successful response",
