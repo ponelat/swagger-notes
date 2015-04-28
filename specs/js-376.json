@@ -1,0 +1,60 @@
+{
+    "host": "petstore.swagger.wordnik.com",
+    "info": {
+        "title": "swagger-js#376 Global produces/consumes doesn't affect selectbox",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/road": {
+            "put": {
+                "description": "i have no 'produces' nor 'consumes'",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "josh",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "I have my own 'produces' and 'consumes'",
+                "produces": [
+                  "operation/produces"
+                ],
+                "consumes": [
+                  "operation/consumes"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "josh",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "produces": [
+        "global/produces"
+    ],
+    "consumes": [
+        "global/consumes"
+    ],
+    "swagger": "2.0"
+}
