@@ -1,0 +1,49 @@
+{
+    "apiVersion": "0.1",
+    "apis": [
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "GET-api-swagger_doc---format-",
+                    "notes": "",
+                    "parameters": [],
+                    "summary": "Swagger compatible API description",
+                    "type": "void"
+                }
+            ],
+            "path": "/api/swagger_doc.{format}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "GET-api-swagger_doc--name---format-",
+                    "notes": "",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "Resource name of mounted API",
+                            "name": "name",
+                            "paramType": "path",
+                            "required": true,
+                            "type": "string"
+                        }
+                    ],
+                    "summary": "Swagger compatible API description for specific API",
+                    "type": "void"
+                }
+            ],
+            "path": "/api/swagger_doc/{name}.{format}"
+        }
+    ],
+    "basePath": "http://172.18.0.4:8080",
+    "produces": [
+        "application/xml",
+        "application/json",
+        "application/octet-stream",
+        "text/plain"
+    ],
+    "resourcePath": "/swagger_doc",
+    "swaggerVersion": "1.2"
+}
