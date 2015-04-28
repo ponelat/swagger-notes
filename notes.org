@@ -31,6 +31,13 @@
       petstore.swagger, validation, yml2json, more?
     - Shout out to community projects, share the love!
     - Build it from the start on the greensock engine
+*** gulp --client
+    - gulp --client='file | url'
+    - links
+      - https://www.npmjs.com/package/gulp-if
+      - http://stackoverflow.com/questions/23023650/is-it-possible-to-pass-a-flag-to-gulp-to-have-it-run-tasks-in-different-ways
+      - https://rawgit.com/
+      - https://github.com/visionmedia/superagent
 
 ** Reference
   - new Operation (parent, scheme, operationId, httpMethod, path, args, definitions, models, clientAuthorizations)
