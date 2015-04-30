@@ -1,0 +1,51 @@
+{
+    "apiVersion": "1.0.0",
+    "apis": [
+        {
+            "path": "/pet",
+            "operations": [
+                {
+                   "type": "TestModel",
+                    "summary": "Add a new pet to the store",
+                    "consumes": [
+                        "application/json"
+                    ],
+                    "method": "POST",
+                    "nickname": "addPet",
+                    "notes": "A note",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "My one good parameter",
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "TestModel"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "All's good in the world"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "basePath": "http://petstore.swagger.io/api",
+    "models": {
+        "TestModel": {
+            "id": "Test",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "produces": [
+        "application/json"
+    ],
+    "resourcePath": "/pet",
+    "swaggerVersion": "1.2"
+}
