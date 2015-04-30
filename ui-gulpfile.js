@@ -126,8 +126,8 @@ gulp.task('copy', ['less'], function() {
 /**
  * Watch for changes and recompile
  */
-gulp.task('watch', function() {
-  return watch(['./src/**/*.{js,less,handlebars}'], function() {
+gulp.task('watch',['dev'], function() {
+  return watch(['./src/**/*.{js,less,handlebars}', '../swagger-js/browser/swagger-client.js'], function() {
     gulp.start('dev');
   });
 });
