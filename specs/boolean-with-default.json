@@ -1,0 +1,102 @@
+{
+  "swagger": "2.0",
+  "host": "petstore.swagger.wordnik.com",
+  "info": {
+      "title": "swagger-ui#1234",
+      "title": "Describe your issue here",
+      "version": "1.0.0"
+  },
+  "paths": {
+      "/road": {
+          "get": {
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "defaultFalse",
+                      "type": "boolean",
+                      "required": false,
+                      "default": false,
+                      "description": "I have a default of false"
+
+                  },
+                  {
+                      "in": "body",
+                      "name": "defaultStrFalse",
+                      "type": "boolean",
+                      "required": false,
+                      "default": "false",
+                      "description": "I have a default of 'false'"
+
+                  },
+                  {
+                      "in": "body",
+                      "name": "defaultTrue",
+                      "type": "boolean",
+                      "required": false,
+                      "default": true,
+                      "description": "I have a default of true"
+
+                  },
+                  {
+                      "in": "body",
+                      "name": "defaultStrTrue",
+                      "type": "boolean",
+                      "required": false,
+                      "default": "true",
+                      "description": "I have a default of 'true'"
+
+                  },
+                  {
+                      "in": "body",
+                      "name": "requiredTrue",
+                      "type": "boolean",
+                      "required": true,
+                      "description": "I am required, no default"
+
+                  },
+                  {
+                      "in": "body",
+                      "name": "requiredTrueDefaultTrue",
+                      "type": "boolean",
+                      "required": true,
+                      "default": true,
+                      "description": "I am required, default of true"
+
+                  },
+                  {
+                      "in": "body",
+                      "name": "requiredUndefined",
+                      "type": "boolean",
+                      "description": "I no defined 'required', default of 'true'"
+
+                  },
+                  {
+                      "in": "body",
+                      "name": "requiredFalse",
+                      "required": false,
+                      "type": "boolean",
+                      "description": "I have a required of 'false'"
+
+                  },
+                  {
+                      "in": "body",
+                      "name": "defaultFalseAndRequiredFalse",
+                      "type": "boolean",
+                      "required": false,
+                      "default": false,
+                      "description": "I have a default of false, and required of false"
+
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                       "schema": {
+                        "type": "string"
+                      }
+                  }
+              }
+          }
+      }
+  }
+}
