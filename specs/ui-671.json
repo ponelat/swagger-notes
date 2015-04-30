@@ -1,0 +1,64 @@
+{
+  "swagger": "2.0",
+  "host": "petstore.swagger.wordnik.com",
+  "info": {
+      "title": "swagger-ui#1234",
+      "title": "Describe your issue here",
+      "version": "1.0.0"
+  },
+  "paths": {
+      "/road": {
+          "get": {
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "josh",
+                      "schema": {
+                        "$ref": "#/definitions/TestModel"
+                      }
+                  }
+              ],
+              "responses": {
+                  "405": {
+                      "description": "Inline schema",
+                      "schema": {
+                        "properties": {
+                            "foob": {
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                      }
+                  },
+                  "406": {
+                      "description": "schema->primitive",
+                      "schema": {
+                        "type": "string"
+                      }
+                  },
+                  "407": {
+                      "description": "primitive",
+                      "type": "string"
+                  },
+                  "408": {
+                      "description": "Successful response",
+                       "schema": {
+                        "$ref": "#/definitions/TestModel"
+                      }
+                  }
+              }
+          }
+      }
+  },
+
+  "definitions": {
+    "TestModel": {
+      "properties": {
+          "foob": {
+              "type": "boolean"
+          }
+      },
+      "type": "object"
+    }
+  }
+}

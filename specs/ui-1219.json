@@ -1,0 +1,62 @@
+{
+  "swagger": "2.0",
+  "host": "petstore.swagger.wordnik.com",
+  "info": {
+      "title": "swagger-ui#1219",
+      "title": "the query param 'commit's value gets replaced by 'Try it out!' ",
+      "version": "1.0.0"
+  },
+  "paths": {
+      "/road": {
+          "get": {
+              "parameters": [
+                  {
+                      "in": "query",
+                      "description": "I get replaced by 'Try it out!'",
+                      "name": "commit",
+                      "type": "string",
+                      "default": "hello"
+                  },
+                  {
+                      "in": "query",
+                      "description": "I am a normal query parameter",
+                      "name": "normal",
+                      "type": "string",
+                      "default": "hi"
+                  },
+                  {
+                      "in": "query",
+                      "description": "I am a normal query parameter",
+                      "name": "responseContentType",
+                      "type": "string",
+                      "default": "howdy"
+                  }
+              ],
+              "responses": {
+                  "406": {
+                      "description": "Not so successful response",
+                       "schema": {
+                        "object": "string",
+                        "properties": {
+                          "normal": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                  },
+                  "200": {
+                      "description": "Successful response",
+                       "schema": {
+                        "object": "string",
+                        "properties": {
+                          "normal": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                  }
+              }
+          }
+      }
+  }
+}
