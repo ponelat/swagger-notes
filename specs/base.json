@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "host": "petstore.swagger.wordnik.com",
   "info": {
-      "title": "swagger-ui#1234",
+      "title": "swagger-ui#",
       "title": "Describe your issue here",
       "version": "1.0.0"
   },
@@ -12,26 +12,31 @@
               "parameters": [
                   {
                       "in": "body",
-                      "name": "josh",
+                      "name": "test",
                       "schema": {
-                        "properties": {
-                            "Favorite": {
-                                "type": "boolean"
-                            }
-                        },
-                        "type": "object"
+                        "$ref": "#/definitions/TestModel"
                       }
                   }
               ],
               "responses": {
                   "200": {
                       "description": "Successful response",
-                       "schema": {
-                        "type": "string"
+                      "schema": {
+                        "$ref": "#/definitions/TestModel"
                       }
                   }
               }
           }
       }
+  },
+  "definitions": {
+    "TestModel": {
+      "properties": {
+          "someProp": {
+            "type": "string"
+          }
+      },
+      "type": "object"
+    }
   }
 }
