@@ -80,10 +80,19 @@
                   },
                   {
                       "in": "body",
-                      "name": "defaultFalseAndRequiredFalse",
+                      "name": "requiredFalseAndDefaultFalse",
                       "type": "boolean",
                       "required": false,
                       "default": false,
+                      "description": "I have a default of false, and required of false"
+
+                  },
+                  {
+                      "in": "body",
+                      "name": "requiredFalseAndDefaultTrue",
+                      "type": "boolean",
+                      "required": false,
+                      "default": true,
                       "description": "I have a default of false, and required of false"
 
                   }
