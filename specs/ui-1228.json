@@ -1,0 +1,84 @@
+{
+    "basePath": "/person",
+    "definitions": {
+        "Person": {
+            "properties": {
+                "externalId1": {
+                    "schema": {
+                      "$ref": "#/definitions/map1"
+                    },
+                    "title": "first",
+                    "type": "object"
+                },
+                "externalId2": {
+                    "items": {
+                        "$ref": "#/definitions/map2"
+                    },
+                    "title": "second",
+                    "type": "array"
+                }
+            },
+            "title": "Information about a person",
+            "type": "object"
+        },
+        "map1": {
+            "properties": {
+                "anId1": {
+                    "title": "Id",
+                    "type": "string"
+                }
+            },
+            "title": "map1",
+            "type": "object"
+        },
+        "map2": {
+            "properties": {
+                "anId2": {
+                    "title": "Id",
+                    "type": "string"
+                }
+            },
+            "title": "map2",
+            "type": "object"
+        }
+    },
+    "info": {
+        "description": "",
+        "title": "Person API",
+        "version": "1"
+    },
+    "paths": {
+        "/person": {
+            "post": {
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "Person"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "Person"
+                        }
+                    }
+                },
+                "summary": "Create new person",
+                "tags": [
+                    "person"
+                ]
+            }
+        }
+    },
+    "swagger": "2.0",
+    "tags": [
+        {
+            "description": "Persons",
+            "name": "person"
+        }
+    ]
+}

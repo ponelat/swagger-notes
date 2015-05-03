@@ -1,0 +1,18 @@
+{
+  "swagger": "2.0",
+  "basePath": "http://localhost:3000/s/",
+  "host": "petstore.swagger.wordnik.com",
+  "info": {
+      "title": "swagger-ui#1234",
+      "title": "Describe your issue here",
+      "version": "1.0.0"
+  },
+  "paths": {
+    "/road": {
+      "$ref": "http://localhost:3000/s/ui-1093.paths.json"
+    },
+    "/street": {
+      "$ref": "ui-1093.paths.json"
+    }
+  }
+}
