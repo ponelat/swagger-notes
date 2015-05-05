@@ -1,0 +1,58 @@
+{
+    "consumes": [
+        "application/json",
+        "application/x-yaml",
+        "application/edn",
+        "application/transit+json",
+        "application/transit+msgpack"
+    ],
+    "definitions": {
+        "Dude": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "skills": {
+                    "enum": [
+                        "super",
+                        "awesome"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": {
+                "type": "string"
+            },
+            "required": [
+                "name",
+                "skills"
+            ]
+        }
+    },
+    "info": {
+        "title": "AdditionalProperties",
+        "version": "0.0.1"
+    },
+    "paths": {
+        "/api/dude": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Dude"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "produces": [
+        "application/json",
+        "application/x-yaml",
+        "application/edn",
+        "application/transit+json",
+        "application/transit+msgpack"
+    ],
+    "swagger": "2.0"
+}
