@@ -1,0 +1,25 @@
+{
+  "swagger": "2.0",
+  "paths": {
+    "/any/route": {
+      "get": {
+        "responses": {
+          "default": {}
+        },
+        "produces": [
+          "application/pdf"
+        ],
+        "tags": [
+          "any"
+        ]
+      }
+    }
+  },
+  "definitions": {},
+  "tags": [],
+  "info": {
+    "title": "Example API",
+    "version": "1.0"
+  },
+  "basePath": "/api"
+}
