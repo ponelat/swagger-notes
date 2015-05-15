@@ -1,0 +1,91 @@
+{
+    "apiVersion": "1.0.0",
+    "description": "Reponse models don't get rendered",
+    "apis": [
+        {
+            "operations": [
+                {
+                    "consumes": [
+                        "application/json"
+                    ],
+                    "method": "POST",
+                    "nickname": "addPet",
+                    "notes": "A note",
+                    "parameters": [
+                        {
+                            "description": "My one good parameter",
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "SimpleError"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "A new token was successfully created",
+                            "responseModel": "AccessTokenData"
+                        },
+                        {
+                            "code": 401,
+                            "message": "The client credentials were invalid (any grant type), the user credentials were invalid (`password` grant type), the user has not yet logged in or has purposely denied the request (`device_code` grant type), or the authorization server denied the request.",
+                            "responseModel": "SimpleError"
+                        },
+                        {
+                            "code": 400,
+                            "message": "A bad request; generally, one or more parameters passed in were incorrect or missing",
+                            "responseModel": "SimpleError"
+                        },
+                        {
+                            "code": 500,
+                            "message": "A server error",
+                            "responseModel": "SimpleError"
+                        },
+                        {
+                            "code": 503,
+                            "message": "Trying things out",
+                            "responseModel": "SimpleError"
+                        }
+                    ],
+                    "summary": "Add a new pet to the store",
+                    "type": "AccessTokenData"
+                }
+            ],
+            "path": "/pet"
+        }
+    ],
+    "basePath": "http://petstore.swagger.io/api",
+    "models": {
+        "AccessTokenData": {
+            "id": "AccessTokenData",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "SimpleError": {
+            "id": "SimpleError",
+            "description": "A simple representation of an error result from an API call, rarely used; in most cases we still return a Collection.doc+JSON document for errors",
+            "required": [
+                "message",
+                "type"
+            ],
+            "properties": {
+                "message": {
+                    "description": "A message describing the error that occurred",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A short string representing the type of error that occurred",
+                    "type": "string",
+                    "defaultValue": "error"
+                }
+            }
+        }
+    },
+    "produces": [
+        "application/json"
+    ],
+    "resourcePath": "/issue",
+    "swaggerVersion": "1.2"
+}
