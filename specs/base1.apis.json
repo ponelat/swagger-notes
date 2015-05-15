@@ -25,6 +25,7 @@
                     "responseMessages": [
                         {
                             "code": 200,
+                            "responseModel": "TestModel",
                             "message": "All's good in the world"
                         }
                     ]
