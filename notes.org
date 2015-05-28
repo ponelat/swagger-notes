@@ -56,3 +56,18 @@
    - SwaggerUI returns instance with swaggerUI#api which is an instance of
      SwaggerClient.
    - swaggerClient#build contructs from spec
+** StatusCodeView...
+   - SwaggerUi, new SwaggerClient -> this.api
+   - ..MainView(model) model.apisArray.each -> resource
+   - ..ResourceView(model) model.operationArray -> operation
+   - ..OperationView(model) model.responses[code].schema
+     ....if schema.$ref -> strip  -> responseMessages
+   - ..StatusCodeView if api.models[strippedSchema$ref] {use api.models[...]}
+** StatusCodeView, from SwaggerClient
+   - #buildFromSpec(response)
+   - path = response.paths.each
+     operation = path[method]
+     new Operation(...,operation,..)
+   - /lib/types/operation.js
+     operation#responses (or args.responses)
+     leaves reponses alone, except for promoting 'success' response
