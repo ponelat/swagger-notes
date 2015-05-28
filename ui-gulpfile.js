@@ -16,6 +16,7 @@ var header = require('gulp-header');
 var pkg = require('./package.json');
 var order = require('gulp-order');
 var cors = require('cors');
+var argv = require('yargs').argv;
 var banner = ['/**',
   ' * <%= pkg.name %> - <%= pkg.description %>',
   ' * @version v<%= pkg.version %>',
@@ -139,7 +140,7 @@ gulp.task('connect', function() {
   connect.server({
     root: 'dist',
     livereload: true,
-    port: 3000,
+    port: argv.port || 3000,
     middleware: function(connect, opt) {
       return [
         cors()
