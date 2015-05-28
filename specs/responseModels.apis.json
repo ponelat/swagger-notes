@@ -43,7 +43,7 @@
                         {
                             "code": 503,
                             "message": "Trying things out",
-                            "responseModel": "SimpleError"
+                            "responseClass": "SimpleError"
                         }
                     ],
                     "summary": "Add a new pet to the store",
