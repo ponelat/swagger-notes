@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Swagger client</title>
+
+  <script src="./node_modules/swagger-client/browser/swagger-client.js"></script>
+
+  <style>
+  textarea {
+    position: relative;
+    width: 100%;
+    min-height: 30%;
+    height: 20em;
+  }
+  </style>
+
+</head>
+<body>
+
+  <h2>Should load some data from the petstore server...</h2>
+  <h4>raw</h4>
+  <textarea id="raw"></textarea>
+  <h4>statusText</h4>
+  <textarea id="status-text"></textarea>
+
+<script>
+
+  var swagger = new SwaggerClient({
+    url: 'http://petstore.swagger.io/v2/swagger.json',
+    success: function() {
+      swagger.pet.getPetById({petId:7},{responseContentType: 'application/xml'},function(pet){
+        console.log('success');
+        document.getElementById('raw').value = JSON.stringify(pet, null, 2);
+        document.getElementById('status-text').value = pet.statusText;
+      });
+    }
+  })
+</script>
+
+</body>
+</html>
