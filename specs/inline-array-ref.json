@@ -1,0 +1,46 @@
+{
+  "swagger": "2.0",
+  "host": "petstore.swagger.wordnik.com",
+  "info": {
+      "title": "swagger-ui#1323",
+      "title": "With the given 200 reponse, the $ref'd renders as 'string', instead of dereferencing",
+      "version": "1.0.0"
+  },
+  "paths": {
+      "/road": {
+          "get": {
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "test",
+                      "schema": {
+                        "$ref": "#/definitions/TestModel"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "schema": {
+                        "properties": {
+                          "things":{
+                            "type": "array",
+                            "description": "an array ref'g a definition",
+                            "items": {
+                              "$ref": "#/definitions/TestModel"
+                            }
+                          }
+                        }
+                      }
+                  }
+              }
+          }
+      }
+  },
+  "definitions": {
+    "TestModel": {
+      "description": "its a thing",
+      "type": "number"
+    }
+  }
+}
