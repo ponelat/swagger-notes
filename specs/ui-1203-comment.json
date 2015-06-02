@@ -1,0 +1,1253 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "2.1.0",
+        "title": "PTV Timetable API (community portal)",
+        "description": "This is Open Knowledge Australia's version of Public Transport Victoria's <a href=\"https://www.data.vic.gov.au/data/dataset/ptv-timetable-api\">Timetable API</a> documentation, built with [Swagger](https://github.com/swagger-api/swagger-ui). It was created by <a href=\"http://stevebennett.me\">Steve Bennett</a> (stevage@gmail.com, <a href=\"https://twitter.com/stevage1\">@stevage1</a>) for Open Knowledge Australia. It was not funded or supported by PTV, but was based on the official documentation using the CC-BY licence.\n\nThe Timetable API 2.0.0 lets you find stations and stops in a given area, query the next few departures from a stop, and the stops on a given line or service. Version 2.1.0, released on 28 May 2015 adds realtime stop arrivale times for trams and some buses, and disruption data. It does not provide vehicle location tracking, spatial data other than stop locations, or route planning. PTV's documentation remains the definitive source. Report issues in this documentation in [GitHub](https://github.com/OKFNau/PTV-API-Swagger/issues). \n\n##Related tools\n  * [Additional PTV reference material](https://ptv.vic.gov.au/about-ptv/ptv-data-and-reports/digital-products/ptv-timetable-api/)\n  * Libraries:\n    * [PtvPy Python library](https://github.com/stevage/ptvpy) by Steve Bennett\n    * [Test harness for PHP](https://github.com/wongm/ptv-api-php-test-harness) by Marcus Wong\n    * [.NET Portable Class Library in C#](https://github.com/Readify/ptv) by Mitch Denny (Readify)\n    * [Qt library in C++](https://github.com/loomiverse/ptv-api-qt), by Dennis Weaver\n    * [Objective C library](https://github.com/loomiverse/ptv-api-objectivec), by Dennis Weaver\n    * [JavaScript - basic code](https://github.com/OKFNau/PTV-API-Swagger/blob/gh-pages/dist/api-signature.js) by Steve Bennett\n  * [OpenTripPlanner with PTV data](https://github.com/loomiverse/ptv-otp-build) by Dennis Weaver\n  * [Previous non-Swagger version of this documentation](http://stevage.github.io/PTV-API-doc/) by Steve Bennett\n  * Sample code:\n    * [Sample code for C#, Java, Objective C](http://stevage.github.io/PTV-API-doc/#header29) (from official documentation)\n    * [PTVGlass ](https://github.com/longzheng/PTVGlass) (C#) by Long Zheng\n  \n##Related data\n  * [PTV timetable data in GTFS format](https://www.data.vic.gov.au/data/dataset/ptv-timetable-and-geographic-information-2015-gtfs) - a complete bulk download of the timetable for 2 weeks\n  * [PTV spatial data in GeoJSON format](https://github.com/okfnau/opentransportdata): Bus routes & stops, tram routes, stops & centrelines; train routes, corridor centrelines, track centrelines, stations, platforms, car parks and bicycle parking.\n  * PTV Usage data on data.vic.gov.au:\n    * [Bus Boardings and Alightings](https://www.data.vic.gov.au/data/dataset/bus-boardings-and-alightings-at-bus-stops-new)\n    * [Tram Boardings and Alightings](https://www.data.vic.gov.au/data/dataset/tram-boardings-and-alightings-at-tram-stops-2015) \n    * [Tram Average Load by Surveyed Service](https://www.data.vic.gov.au/data/dataset/tram-average-load-by-surveyed-service)\n    * [Metro Train Loads at Cordon Stations](https://www.data.vic.gov.au/data/dataset/may-2012-melbourne-metro-train-loads-by-service-at-cordon-stations-new)\n  * PTV Accessibility data (not all machine readable):\n    * [Accessible toilets](http://ptv.vic.gov.au/getting-around/accessible-transport/accessible-trains/accessible-toilets-at-metropolitan-stations/)\n    * [Station patronage (.xls)](http://ptv.vic.gov.au/assets/PTV/PTV%20docs/research/PTV-Station-by-Station-Fact-Sheet-accessible-version.xls)\n    * [Bus patronage](http://ptv.vic.gov.au/assets/PTV/PTV%20docs/research/PTV-Bus-Route-Patronage-Summary-accessible-version.xls)\n    * [Passenger load surveys](http://ptv.vic.gov.au/about-ptv/ptv-data-and-reports/passenger-load-surveys/)\n  * [TramTracker API](http://ws.tramtracker.com.au/pidsservice/pids.asmx) (SOAP)\n  * [Melbourne bike share API](http://www.melbournebikeshare.com.au/stationmap/data) (or use [CityBik.es](http://api.citybik.es/v2/) )\n\n\n##Licence\n[Creative Commons 3.0 Attribution](https://creativecommons.org/licenses/by/3.0/au/) (Attribute \"Public Transport Victoria\" and \"Steve Bennett\")\n",
+        "license": {
+            "url": "https://creativecommons.org/licenses/by/3.0/au/",
+            "name": "Creative Commons Attribution 3.0 Australia"
+        },
+        "termsOfService": "The data provided to you by PTV is provided 'as is' and PTV is not liable for how you use this data, how third parties use or rely on this data or any errors contained within the data. You are responsible for determining whether the data is suitable for your particular usage and purposes. \n\nDo use the API dynamically to get the most up-to-date data for your audience.\n\nDo not cache the data.\n\nDo not hammer our servers. Do not use the API to make multiple requests for large sets of data in short periods of time.\n"
+    },
+    "host": "timetableapi.ptv.vic.gov.au",
+    "schemes": [
+        "http"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "definitions": {
+        "flags": {
+            "type": "string",
+            "description": "Hyphen (-) separated list of stop options.  RR = Reservations Required; GC = Guaranteed Connection; DOO = Drop Off Only; PUO = Pick Up Only; MO = Mondays only; TU = Tuesdays only; WE = Wednesdays only; TH = Thursdays only; FR = Fridays only; SS = School days only; note: ignore \"E\" flag\n"
+        },
+        "cluster": {
+            "type": "object",
+            "properties": {
+                "locations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/location"
+                    }
+                }
+            },
+            "required": [
+                "locations"
+            ]
+        },
+        "searchresult": {
+            "type": "object",
+            "required": [
+                "type",
+                "result"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "'stop' or 'line'"
+                },
+                "result": {
+                    "description": "Stops have transport_type, suburb, location_name, lat, lon, distance, stop_id. \nLines have transport_type, line,   line_name, line_number\n",
+                    "$ref": "#/definitions/line_or_stop"
+                }
+            }
+        },
+        "transport_type": {
+            "type": "string",
+            "description": "(stop only) the mode of transport serviced by the stop: `train`, `tram`, `bus`, `vline`, `nightrider`"
+        },
+        "lat": {
+            "description": "latitude in decimal degrees, eg -37.82005",
+            "type": "number",
+            "example": -37.82005
+        },
+        "lon": {
+            "description": "longitude in decimal degrees, eg 144.959047",
+            "type": "number",
+            "example": 144.959047
+        },
+        "stop_id": {
+            "type": "integer",
+            "description": "the unique identifier of each stop"
+        },
+        "location_name": {
+            "type": "string",
+            "description": "the name of the stop based on a concise geographic description. e.g. \"20-Barkly Square/115 Sydney Rd (Brunswic"
+        },
+        "suburb": {
+            "type": "string",
+            "description": "Suburb name"
+        },
+        "distance": {
+            "type": "number",
+            "description": "Returns zero. \"It is a legacy attribute of unknown worth\""
+        },
+        "location": {
+            "type": "object",
+            "properties": {
+                "suburb": {
+                    "$ref": "#/definitions/suburb"
+                },
+                "location_name": {
+                    "$ref": "#/definitions/location_name"
+                },
+                "lat": {
+                    "$ref": "#/definitions/lat"
+                },
+                "lon": {
+                    "$ref": "#/definitions/lon"
+                },
+                "distance": {
+                    "$ref": "#/definitions/distance"
+                },
+                "transport_type": {
+                    "$ref": "#/definitions/transport_type"
+                },
+                "stop_id": {
+                    "$ref": "#/definitions/stop_id"
+                },
+                "outlet_type": {
+                    "type": "string",
+                    "description": "(outlet only) either `stop` meaning a myki card machine at a station or stop or `retail` meaning a shop of some kind"
+                }
+            },
+            "required": [
+                "suburb",
+                "location_name",
+                "lat",
+                "lon",
+                "distance",
+                "transport_type",
+                "stop_id",
+                "outlet_type"
+            ]
+        },
+        "line_or_stop": {
+            "type": "object",
+            "required": [
+                "transport_type"
+            ],
+            "properties": {
+                "transport_type": {
+                    "$ref": "#/definitions/transport_type"
+                },
+                "suburb": {
+                    "$ref": "#/definitions/suburb"
+                },
+                "location_name": {
+                    "$ref": "#/definitions/location_name"
+                },
+                "lat": {
+                    "$ref": "#/definitions/lat"
+                },
+                "lon": {
+                    "$ref": "#/definitions/lon"
+                },
+                "distance": {
+                    "$ref": "#/definitions/distance"
+                },
+                "stop_id": {
+                    "$ref": "#/definitions/stop_id"
+                },
+                "line_id": {
+                    "$ref": "#/definitions/line_id"
+                },
+                "line_name": {
+                    "$ref": "#/definitions/line_name"
+                },
+                "line_number": {
+                    "$ref": "#/definitions/line_number"
+                }
+            }
+        },
+        "stop": {
+            "type": "object",
+            "properties": {
+                "suburb": {
+                    "$ref": "#/definitions/suburb"
+                },
+                "location_name": {
+                    "$ref": "#/definitions/location_name"
+                },
+                "lat": {
+                    "$ref": "#/definitions/lat"
+                },
+                "lon": {
+                    "$ref": "#/definitions/lon"
+                },
+                "distance": {
+                    "$ref": "#/definitions/distance"
+                },
+                "transport_type": {
+                    "$ref": "#/definitions/transport_type"
+                },
+                "stop_id": {
+                    "$ref": "#/definitions/stop_id"
+                }
+            },
+            "required": [
+                "suburb",
+                "location_name",
+                "lat",
+                "lon",
+                "distance",
+                "stop_id"
+            ],
+            "example": {
+                "result": {
+                    "suburb": "East Melbourne",
+                    "transport_type": "tram",
+                    "stop_id": 2825,
+                    "location_name": "Clarendon St/Wellington Pde #11",
+                    "lat": -37.81603,
+                    "lon": 144.9824,
+                    "distance": 0.00000408647838
+                }
+            }
+        },
+        "line_id": {
+            "type": "string",
+            "description": "(numeric string) the unique identifier of each line",
+            "example": 1818
+        },
+        "line_name": {
+            "type": "string",
+            "description": "the name of the line.",
+            "example": "970 - City - Frankston - Mornington - Rosebud via Nepean Highway & Frankston Station"
+        },
+        "line_number": {
+            "type": "string",
+            "description": "the line number that is presented to the public (i.e. not the \"line_id\")"
+        },
+        "line": {
+            "type": "object",
+            "properties": {
+                "transport_type": {
+                    "$ref": "#/definitions/transport_type"
+                },
+                "line_id": {
+                    "$ref": "#/definitions/line_id"
+                },
+                "line_name": {
+                    "$ref": "#/definitions/line_name"
+                },
+                "line_number": {
+                    "$ref": "#/definitions/line_number"
+                }
+            },
+            "required": [
+                "transport_type",
+                "line_id",
+                "line_name",
+                "line_number"
+            ]
+        },
+        "direction": {
+            "type": "object",
+            "properties": {
+                "linedir_id": {
+                    "type": "integer",
+                    "description": "unique identifier of a particular line and direction. e.g. \"21\""
+                },
+                "direction_id": {
+                    "type": "integer",
+                    "description": "unique identifier of a direction (e.g. \"0\" signifies \"city\")"
+                },
+                "direction_name": {
+                    "type": "string",
+                    "description": "name of the direction of the service. e.g. \"City (Flinders Street)\""
+                },
+                "line": {
+                    "$ref": "#/definitions/line"
+                }
+            },
+            "required": [
+                "linedir_id",
+                "direction_id",
+                "direction_name",
+                "line"
+            ]
+        },
+        "platform": {
+            "type": "object",
+            "properties": {
+                "realtime_id": {
+                    "type": "integer",
+                    "description": "a place holder for the stop's real-time feed system ID (for potential future implementation; as no real-time feeds are provided at this time, this returns \"0\")"
+                },
+                "stop": {
+                    "$ref": "#/definitions/stop"
+                },
+                "direction": {
+                    "$ref": "#/definitions/direction"
+                }
+            },
+            "required": [
+                "realtime_id",
+                "stop",
+                "direction"
+            ]
+        },
+        "run": {
+            "type": "object",
+            "properties": {
+                "transport_type": {
+                    "$ref": "#/definitions/transport_type"
+                },
+                "run_id": {
+                    "type": "integer",
+                    "description": "The unique identifier of the run"
+                },
+                "num_skipped": {
+                    "type": "integer",
+                    "description": "The number of stops skipped for the run, applicable to train; a number greater than zero indicates either a \nlimited express or express service\n"
+                },
+                "destination_id": {
+                    "type": "integer",
+                    "description": "The stop_id of the destination, i.e. the last stop for the run",
+                    "example": 1044
+                },
+                "destination_name": {
+                    "type": "string",
+                    "description": "The location_name of the destination, i.e. the last stop for the run",
+                    "example": "Craigieburn"
+                }
+            },
+            "required": [
+                "transport_type",
+                "run_id",
+                "num_skipped",
+                "destination_id",
+                "destination_name"
+            ]
+        },
+        "timetable_value": {
+            "type": "object",
+            "properties": {
+                "time_table_utc": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "the scheduled time of the service at the stop, in ISO 8601 UTC",
+                    "example": "2014-11-18T03:21:00Z"
+                },
+                "time_realtime_utc": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "the real-time of the service at the stop if this is available, in ISO 8601 UTC. Available for trams and some bus routes; if the relevant feed system is not available, it will return null",
+                    "example": "2014-11-18T03:24:00Z"
+                },
+                "flags": {
+                    "$ref": "#/definitions/flags"
+                },
+                "platform": {
+                    "$ref": "#/definitions/platform"
+                },
+                "run": {
+                    "$ref": "#/definitions/run"
+                }
+            },
+            "required": [
+                "time_table_utc",
+                "time_realtime_utc",
+                "flags",
+                "platform",
+                "run"
+            ]
+        },
+        "disruptions": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/disruption"
+            }
+        },
+        "disruption": {
+            "type": "object",
+            "required": [
+                "title",
+                "url",
+                "description",
+                "publishedOn"
+            ],
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "a headline or title summarising the disruption information",
+                    "example": "Buses replacing trains on the Cranbourne and Pakenham lines after 8.45pm: Saturday 15 February 2014"
+                },
+                "url": {
+                    "type": "string",
+                    "description": "the url of the relevant article on the PTV website",
+                    "example": "http://ptv.vic.gov.au/disruptions/buses-replacing-trains-on-thecranbourne-and-pakenham-lines-after-8-45pm-saturday-15-february-2014/"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "a truncated version of the description of the disruption that appears on the PTV website",
+                    "example": "Due to signalling upgrades and construction work as part of the Springvale Level Crossing Removal, buses will replace all trains between Westall and Dandenong after 8.45pm on Saturday 15 February."
+                },
+                "publishedOn": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "the date and time the disruption information is published on the PTV website, in ISO 8601 UTC format",
+                    "example": "“2014-01-29T23:30:54Z"
+                }
+            }
+        },
+        "departures": {
+            "title": "Departures",
+            "type": "object",
+            "required": [
+                "values"
+            ],
+            "properties": {
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/timetable_value"
+                    },
+                    "example": [
+                        {
+                            "platform": {
+                                "realtime_id": 0,
+                                "stop": {
+                                    "suburb": "East Melbourne",
+                                    "transport_type": "train",
+                                    "stop_id": 1104,
+                                    "location_name": "Jolimont-MCG",
+                                    "lat": -37.81653,
+                                    "lon": 144.9841,
+                                    "distance": 0
+                                },
+                                "direction": {
+                                    "linedir_id": 41,
+                                    "direction_id": 8,
+                                    "direction_name": "Hurstbridge",
+                                    "line": {
+                                        "transport_type": "train",
+                                        "line_id": 8,
+                                        "line_name": "Hurstbridge",
+                                        "line_number": "Hurstbridge"
+                                    }
+                                }
+                            },
+                            "run": {
+                                "transport_type": "train",
+                                "run_id": 21172,
+                                "num_skipped": 0,
+                                "destination_id": 1041,
+                                "destination_name": "Clifton Hill"
+                            },
+                            "time_timetable_utc": "2014-01-20T03:21:00.000Z",
+                            "time_realtime_utc": null,
+                            "flags": null
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "parameters": {
+        "devid": {
+            "name": "devid",
+            "in": "query",
+            "type": "integer",
+            "required": true,
+            "description": "Your developer ID, provided by PTV."
+        },
+        "signature": {
+            "name": "signature",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "Computed HMAC signature. See HealthCheck implementation notes."
+        },
+        "latitude": {
+            "name": "latitude",
+            "in": "path",
+            "type": "number",
+            "required": true,
+            "description": "prescribed latitude, in decimal degrees. \ne.g. `-37.8`\n"
+        },
+        "longitude": {
+            "name": "longitude",
+            "in": "path",
+            "type": "number",
+            "required": true,
+            "description": "prescribed longitude, in decimal degrees. e.g. `144.9`\n"
+        },
+        "mode": {
+            "name": "mode",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "description": "A number as follows:\n\n  * `0` Train (metropolitan)\n  * `1` Tram\n  * `2` Bus (metropolitan and regional, but not V/Line)\n  * `3` V/Line train and coach\n  * `4` NightRider\n"
+        },
+        "stop": {
+            "name": "stop",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "the `stop_id` of the stop"
+        },
+        "line": {
+            "name": "line",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "the `line_id` of the requested services"
+        },
+        "stoplimit": {
+            "name": "limit",
+            "type": "integer",
+            "in": "path",
+            "required": true,
+            "description": "The number of next departure times to be returned, i.e. `5` will return the next five\ndeparture times (notes: `0` will return departures for the entire day; `1` will limit\nit to the very next departure, even if this is a few days away)\n"
+        },
+        "for_utc": {
+            "name": "for_utc",
+            "type": "string",
+            "format": "date-time",
+            "in": "query",
+            "required": false,
+            "description": "Get services from this date/time and later, in ISO 8601 UTC format"
+        }
+    },
+    "paths": {
+        "/v2/healthcheck": {
+            "get": {
+                "summary": "Health Check",
+                "tags": [
+                    "General"
+                ],
+                "description": "A check on the timely availability, connectivity and reachability of the services that deliver security, caching and data to web clients. A health status report is returned.\n\n### Signature\nEvery API call, including this one, requires a \"signature\" parameter. This is an         \nuppercase HMAC-SHA1 hash of the whole request, computed as `crypto.HMACSHA1(request,key).toUppercase()`, where:\n  * `request` is the URL from `/v2` up to and including the `devid=` parameter\n  * `key` is your private API key\n",
+                "parameters": [
+                    {
+                        "name": "timestamp",
+                        "in": "query",
+                        "type": "string",
+                        "format": "date-time",
+                        "required": true,
+                        "description": "the date and time of the request in ISO 8601 UTC format<br/> e.g. `2013-11-13T05:24:25Z`."
+                    },
+                    {
+                        "$ref": "#/parameters/devid"
+                    },
+                    {
+                        "$ref": "#/parameters/signature"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "HealthCheckResponse",
+                            "type": "object",
+                            "properties": {
+                                "securityCheckOk": {
+                                    "type": "boolean",
+                                    "description": "indicates whether your key is valid/signature is calculated correctly"
+                                },
+                                "clientClockOk": {
+                                    "type": "boolean",
+                                    "description": "indicates whether your clock is synchronised with our clock within 3 minutes"
+                                },
+                                "memCacheOK": {
+                                    "type": "boolean",
+                                    "description": "indicates status of the performance cache"
+                                },
+                                "databaseOK": {
+                                    "type": "boolean",
+                                    "description": "indicates availability of the data"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v2/nearme/latitude/{latitude}/longitude/{longitude}": {
+            "get": {
+                "summary": "Stops Nearby",
+                "description": "Stops Nearby returns up to 30 stops nearest to a specified coordinate. \"Stops\" includes train stations as well as tram and bus stops.\n\nThere are no spatial constraints on how Stops Nearby retrieves stops. It will always return up to 30 stops near the passed latitude and longitude coordinates, even if some of those stops are (relatively) far away.\n",
+                "tags": [
+                    "Search"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/latitude"
+                    },
+                    {
+                        "$ref": "#/parameters/longitude"
+                    },
+                    {
+                        "$ref": "#/parameters/devid"
+                    },
+                    {
+                        "$ref": "#/parameters/signature"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "Stops nearby",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/stop"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v2/poi/{poi}/lat1/{latitude1}/long1/{longitude1}/lat2/{latitude2}/long2/{longitude2}/griddepth/{griddepth}/limit/{limit}": {
+            "get": {
+                "summary": "Transport POIs by Map",
+                "tags": [
+                    "Search"
+                ],
+                "description": "Transport POIs by Map returns a set of locations consisting of stops and/or myki ticket outlets (collectively known as points of interest – i.e. POIs) within a region demarcated on a map through a set of latitude and longitude coordinates.\n\nThrough the poi parameter, the API can return any combination of POIs (e.g. ticket outlets only, bus stops only, tram stops and ticket outlets only, all of the above, and so on).\n\nWhere POIs are geographically dispersed they are returned in a list; where they are geographically concentrated they can be returned in a cluster, depending on the map griddepth that is sent in the request.\n\nHave a play around with the `griddepth` parameter to see what best suits the device you are developing for. If you set griddepth to zero it will not cluster.\n\nYou can also set a limit of how many stops are listed in a cluster. The API will return what the total number of POIs is, however it will only return data for as many POIs are set by the `limit`. \n\nWhen there are more POIs in a cluster than the `limit`, the POIs returned will be determined by a business rule that is hard coded at the server end. The order of priority is V/Line stops first, followed by train, tram, bus, NightRider and, last of all, ticket outlets.\n\n### Response\nReturns a list of JSON objects which are either `locations` or `clusters`; `clusters` have their own list of `locations` within them. `locations` have either a `stop` or `outlet` (i.e. ticket outlet) object embedded within them. For more information on the data structures, check out the JSON object structure.\n",
+                "parameters": [
+                    {
+                        "name": "poi",
+                        "type": "string",
+                        "description": "a comma separated list of numbers representing the types of POIs you want returned, defined as follows:\n\n* `0` Train (metropolitan)\n* `1` Tram\n* `2` Bus (metropolitan and regional, but not V/Line)\n* `3` V/Line regional train and coach\n* `4` NightRider\n* `100` Ticket outlet\n\ne.g. `0,1,2,4,100` would return train, tram, bus, NightRider & ticket outlets\n",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "latitude1",
+                        "type": "number",
+                        "description": "northern latitude of the bounding box, expressed in decimal degrees.",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "latitude2",
+                        "type": "number",
+                        "description": "southern latitude of the bounding box, expressed in decimal degrees.",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "longitude1",
+                        "type": "number",
+                        "description": "western longitude of the bounding box, expressed in decimal degrees.",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "longitude2",
+                        "type": "number",
+                        "description": "eastern longitude of the boounding box, expressed in decimal degrees.",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "griddepth",
+                        "type": "integer",
+                        "description": "the number of cells per block of cluster grid (0-20 inclusive).",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "limit",
+                        "type": "integer",
+                        "description": "the minimum number of POIs (stops or outlets) required to create a cluster, as well as the maximum number of POIs returned as part of a cluster in the JSON response (for example, if the limit is \"4\", at least 4 POIs are required to form a cluster; and in the JSON response, if there are 7 total locations in a cluster, only 4 will be listed in the response)",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/parameters/devid"
+                    },
+                    {
+                        "$ref": "#/parameters/signature"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "title": "Success",
+                            "type": "object",
+                            "properties": {
+                                "minLat": {
+                                    "type": "number",
+                                    "description": "the minimum latitude value of all of the locations in the cluster, including those that are not returned (i.e. they are beyond the limit set)"
+                                },
+                                "minLong": {
+                                    "type": "number",
+                                    "description": "the minimum longitude value of all of the locations in the cluster, including those that are not returned (i.e. they are beyond the limit set)"
+                                },
+                                "maxLat": {
+                                    "type": "number",
+                                    "description": "the maximum latitude value of all of the locations in the cluster, including those that are not returned (i.e. they are beyond the limit set)"
+                                },
+                                "maxLong": {
+                                    "type": "number",
+                                    "description": "the maximum longitude value of all of the locations in the cluster, including those that are not returned (i.e. they are beyond the limit set)"
+                                },
+                                "weightedLat": {
+                                    "type": "number",
+                                    "description": "latitude at the point that is the average of all POIs returned in a grid cell"
+                                },
+                                "weightedLong": {
+                                    "type": "number",
+                                    "description": "longitude at the point that is the average of all POIs returned in a grid cell"
+                                },
+                                "totalLocations": {
+                                    "type": "integer",
+                                    "description": "the total number of locations within the region described"
+                                },
+                                "locations": {
+                                    "type": "array",
+                                    "description": "\"locations\" have either a \"stop\" or \"outlet\" (i.e. ticket outlet) object embedded within them.\n",
+                                    "items": [
+                                        {
+                                            "$ref": "#/definitions/location"
+                                        }
+                                    ]
+                                },
+                                "clusters": {
+                                    "type": "array",
+                                    "description": "\"clusters\" have their own list of \"locations\" within them\n",
+                                    "items": [
+                                        {
+                                            "$ref": "#/definitions/cluster"
+                                        }
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "minLat",
+                                "minLong",
+                                "maxLat",
+                                "maxLong",
+                                "weightedLat",
+                                "weightedLong",
+                                "totalLocations",
+                                "clusters",
+                                "locations"
+                            ],
+                            "example": {
+                                "minLat": -37.81959,
+                                "minLong": 144.979126,
+                                "maxLat": -37.8157463,
+                                "maxLong": 144.9854,
+                                "weightedLat": -37.81671,
+                                "weightedLong": 144.982849,
+                                "totalLocations": 7,
+                                "locations": [
+                                    {
+                                        "suburb": "Melbourne City",
+                                        "transport_type": "tram",
+                                        "stop_id": 2171,
+                                        "location_name": "7B-Rod Laver Arena/Melbourne Park",
+                                        "lat": -37.81959,
+                                        "lon": 144.979126,
+                                        "distance": 0
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v2/search/{searchtext}": {
+            "get": {
+                "summary": "Search",
+                "tags": [
+                    "Search"
+                ],
+                "description": "The Search API returns all stops and lines that match the input search text.         \n\nNote: It will only return “line” objects if the input search text is less than three (3) characters.\n\n### Response\nReturns an array of JSON \"result\" objects for which the `type` equals either `stop` or `line`. \nA `stop` object or `line` object is embedded within each \"result\" depending on its type. \n",
+                "parameters": [
+                    {
+                        "name": "searchtext",
+                        "type": "string",
+                        "description": "Search text that could match a stop or line, for example `Alamein`\n",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/parameters/devid"
+                    },
+                    {
+                        "$ref": "#/parameters/signature"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "title": "Results",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/searchresult"
+                            },
+                            "example": [
+                                {
+                                    "type": "line",
+                                    "result": {
+                                        "transport_type": "tram",
+                                        "line_id": 5313,
+                                        "line_name": "Route 31 - Hoddle Street - Victoria Harbour Docklands",
+                                        "line_number": "Route 31"
+                                    }
+                                },
+                                {
+                                    "type": "stop",
+                                    "result": {
+                                        "suburb": "East Melbourne",
+                                        "transport_type": "tram",
+                                        "stop_id": 2825,
+                                        "location_name": "Clarendon St/Wellington Pde #11",
+                                        "lat": -37.81603,
+                                        "lon": 144.9824,
+                                        "distance": 0.00000408647838
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v2/lines/mode/{mode}": {
+            "get": {
+                "summary": "Lines by Mode",
+                "tags": [
+                    "Search"
+                ],
+                "description": "Lines by Mode returns the lines for a selected mode of transport.\n\n**Note** Only one transport type can be queried at a time through the Lines by Mode API.\n\n**Note** The optional parameter `name` allows you to filter on a specific line.\n",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/mode"
+                    },
+                    {
+                        "name": "name",
+                        "description": "Part of a line’s name e.g. “Alamein”, “Highpoint”\n",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "$ref": "#/parameters/devid"
+                    },
+                    {
+                        "$ref": "#/parameters/signature"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "title": "Lines",
+                            "description": "List of lines matching the query",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/line"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v2/mode/{mode}/stop/{stop}/departures/by-destination/limit/{limit}": {
+            "get": {
+                "summary": "Broad Next Departures",
+                "tags": [
+                    "Timetable"
+                ],
+                "description": "Broad Next Departures returns the next departure times at a prescribed stop irrespective \nof the line and direction of the service. For example, if the stop is Camberwell Station,\nBroad Next Departures will return the times for all three lines (Belgrave, Lilydale and\nAlamein) running in both directions (towards the city and away from the city).\n\nThrough the `limit` parameter you can choose to return the very next departure or all departures for the day from that point in time.\n\n\n### Real-time data\n\nResults now include real-time data for tram and bus serviceswhere this data is made available to PTV. As at the date of this document, real-time data is available on all tram services in Melbourne. Work has also commenced to deliver real-time data for bus services in Melbourne; this work will continue progressively in metropolitan and regional Victoria. \n\n**No real-time data feeds are provided for services other than tram and bus.**\n\nWe have implemented a throttling mechanism to protect our external suppliers of real-time data. As a result, the API may not return real-time tram and bus data in its response (all other data will continue to be made available).\n\nNo real-time data is returned if the limit is set to `0` (zero). \n\n** Note** The `for_utc` parameter is not documented in the official PTV documentation.\n\n### Response\n\nReturns a collection of JSON timetable \"values\" that have a \"platform\" and \"run\" object\nembedded within them. The \"platform\" objects have a \"stop\" and \"direction\" object in\nthem, and the \"direction\" object has a \"line\" object within it.\n",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/mode"
+                    },
+                    {
+                        "$ref": "#/parameters/stop"
+                    },
+                    {
+                        "$ref": "#/parameters/stoplimit"
+                    },
+                    {
+                        "$ref": "#/parameters/for_utc"
+                    },
+                    {
+                        "$ref": "#/parameters/devid"
+                    },
+                    {
+                        "$ref": "#/parameters/signature"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "title": "Departures",
+                            "type": "object",
+                            "required": [
+                                "values"
+                            ],
+                            "properties": {
+                                "values": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/timetable_value"
+                                    },
+                                    "example": [
+                                        {
+                                            "platform": {
+                                                "realtime_id": 0,
+                                                "stop": {
+                                                    "suburb": "East Melbourne",
+                                                    "transport_type": "train",
+                                                    "stop_id": 1104,
+                                                    "location_name": "Jolimont-MCG",
+                                                    "lat": -37.81653,
+                                                    "lon": 144.9841,
+                                                    "distance": 0
+                                                }
+                                            },
+                                            "direction": {
+                                                "linedir_id": 38,
+                                                "direction_id": 5,
+                                                "direction_name": "South Morang",
+                                                "line": {
+                                                    "transport_type": "train",
+                                                    "line_id": 5,
+                                                    "line_name": "South Morang",
+                                                    "line_number": "South Morang"
+                                                }
+                                            },
+                                            "run": {
+                                                "transport_type": "train",
+                                                "run_id": 13975,
+                                                "num_skipped": 0,
+                                                "destination_id": 1224,
+                                                "destination_name": "South Morang"
+                                            },
+                                            "time_timetable_utc": "2014-01-20T03:21:00.000Z",
+                                            "time_realtime_utc": null,
+                                            "flags": ""
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v2/mode/{mode}/line/{line}/stop/{stop}/directionid/{directionid}/departures/all/limit/{limit}": {
+            "get": {
+                "summary": "Specific Next Departures",
+                "tags": [
+                    "Timetable"
+                ],
+                "description": "Specific Next Departures returns the times for the next departures at a prescribed stop for\na specific mode, line and direction. For example, if the stop is Camberwell Station,\nSpecific Next Departures returns only the times for one line running in one direction (for\nexample, the Belgrave line running towards the city).\n\n**See also** notes at Broad Next Departures.\n\n### Response\n\nReturns a collection of JSON timetable \"values\" that have a \"platform\" and \"run\" object\nembedded within them. The \"platform\" objects have a \"stop\" and \"direction\" object in\nthem, and the \"direction\" object has a \"line\" object within it.\n",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/mode"
+                    },
+                    {
+                        "$ref": "#/parameters/line"
+                    },
+                    {
+                        "$ref": "#/parameters/stop"
+                    },
+                    {
+                        "name": "directionid",
+                        "type": "string",
+                        "in": "path",
+                        "required": true,
+                        "description": "the direction_id of the requested services"
+                    },
+                    {
+                        "$ref": "#/parameters/stoplimit"
+                    },
+                    {
+                        "$ref": "#/parameters/for_utc"
+                    },
+                    {
+                        "$ref": "#/parameters/devid"
+                    },
+                    {
+                        "$ref": "#/parameters/signature"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/departures"
+                        }
+                    }
+                }
+            }
+        },
+        "/v2/mode/{GTFS_mode}/route_id/{GTFS_route}/stop/{GTFS_stop}/direction/{GTFS_direction}/departures/all/limit/{limit}": {
+            "get": {
+                "tags": [
+                    "Timetable"
+                ],
+                "summary": "Specific Next Departures (GTFS Input)",
+                "description": "The new Specific Next Departures (GTFS Input) API returns the same data as Specific Next Departures, namely the times for the next departures at a prescribed stop for a specific mode, line and direction. Unlike Specific next Departures, however, it uses data inputs from the PTV GTFS dataset.\n\nResults include real-time data for tram and bus services where this data is made available to PTV.\n\n**See also** notes at Broad Next Departures.\n\nThe public transport data accessed through the PTV Timetable API and in the PTV GTFS dataset includes attributes with the same name that hold different data. For example, “stop_id” exists in both datasets but an API stop_id is different to a GTFS stop_id.\n\nOnly the Specific Next Departures (GTFS Input) API uses the GTFS data – all other calls in the PTV Timetable API do not accept GTFS inputs.\n\n### Response        \nReturns an identical response to the Specific Next Departures API.\n\n**Note** The response will be PTV Timetable API JSON objects – not GTFS objects\n",
+                "parameters": [
+                    {
+                        "name": "GTFS_mode",
+                        "in": "path",
+                        "type": "string",
+                        "description": "the GTFS servicemode of the stop, taken from the PTV GTFS dataset. GTFS service mode is defined in the PTV GTFS Release Notes available on the DataVic website.",
+                        "required": true
+                    },
+                    {
+                        "name": "GTFS_route",
+                        "description": "the GTFS route_id of the stop, taken from the PTV GTFS dataset e.g. “4-364-mjp-1”. Available within the trips.txt files.",
+                        "in": "path",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "GTFS_stop",
+                        "description": "The GTFS stop_id of the stop, taken from the PTV GTFS dataset e.g. “19943”.  Available within the stop.txt files in the PTV GTFS dataset,",
+                        "in": "path",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "GTFS_direction",
+                        "description": "The GTFS direction_id of the stop, taken from the PTV GTFS dataset e.g. “0” Available within the trips.txt files.",
+                        "in": "path",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "limit",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/parameters/for_utc"
+                    },
+                    {
+                        "$ref": "#/parameters/devid"
+                    },
+                    {
+                        "$ref": "#/parameters/signature"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/departures"
+                        }
+                    }
+                }
+            }
+        },
+        "/v2/mode/{mode}/run/{run}/stop/{stop}/stopping-pattern": {
+            "get": {
+                "summary": "Stopping Pattern",
+                "tags": [
+                    "Timetable"
+                ],
+                "description": "The Stopping Pattern API returns the stopping pattern for a specific run (i.e. transport\nservice) from a prescribed stop at a prescribed time. The stopping pattern is comprised of\ntimetable values ordered by stopping order.\n\n### Response\n\nReturns a collection of JSON timetable `values` that have a `platform` and `run` object\nembedded within them. The `platform` objects have a `stop` and `direction` object in\nthem, and the `direction` object has a `line` object within it.\n\n### Warning\n\nThe `for_utc` parameter appears to be required. This is not documented. \n",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/mode"
+                    },
+                    {
+                        "name": "run",
+                        "type": "string",
+                        "in": "path",
+                        "required": true,
+                        "description": "the run_id of the requested run"
+                    },
+                    {
+                        "$ref": "#/parameters/stop"
+                    },
+                    {
+                        "$ref": "#/parameters/for_utc"
+                    },
+                    {
+                        "$ref": "#/parameters/devid"
+                    },
+                    {
+                        "$ref": "#/parameters/signature"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "title": "Stopping pattern",
+                            "type": "object",
+                            "required": [
+                                "values"
+                            ],
+                            "properties": {
+                                "values": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/timetable_value"
+                                    },
+                                    "example": [
+                                        {
+                                            "platform": {
+                                                "realtime_id": 0,
+                                                "stop": {
+                                                    "suburb": "Melbourne City",
+                                                    "transport_type": "train",
+                                                    "stop_id": 1071,
+                                                    "location_name": "Flinders Street",
+                                                    "lat": -37.81831,
+                                                    "lon": 144.966965,
+                                                    "distance": 0
+                                                },
+                                                "direction": {
+                                                    "linedir_id": 0,
+                                                    "direction_id": 8,
+                                                    "direction_name": "Hurstbridge",
+                                                    "line": {
+                                                        "transport_type": "train",
+                                                        "line_id": 8,
+                                                        "line_name": "Hurstbridge",
+                                                        "line_number": "Hurstbridge"
+                                                    }
+                                                }
+                                            },
+                                            "run": {
+                                                "transport_type": "train",
+                                                "run_id": 21173,
+                                                "num_skipped": 0,
+                                                "destination_id": 0,
+                                                "destination_name": null
+                                            },
+                                            "time_timetable_utc": "2014-01-20T03:19:00.000Z",
+                                            "time_realtime_utc": null,
+                                            "flags": null
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v2/mode/{mode}/line/{line}/stops-for-line": {
+            "get": {
+                "summary": "Stops on a Line",
+                "tags": [
+                    "Search"
+                ],
+                "description": "The Stops on a Line API returns a list of all the stops for a requested line, ordered by\nlocation name.\n\n### Response\n\nReturns a collection of JSON \"stop\" objects ordered by `location_name`\n",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/mode"
+                    },
+                    {
+                        "$ref": "#/parameters/line"
+                    },
+                    {
+                        "$ref": "#/parameters/devid"
+                    },
+                    {
+                        "$ref": "#/parameters/signature"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "title": "Stops",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/stop"
+                            },
+                            "example": [
+                                {
+                                    "suburb": "Plenty",
+                                    "transport_type": "bus",
+                                    "stop_id": 28066,
+                                    "location_name": "200 Yan Yean Rd",
+                                    "lat": -37.6616554,
+                                    "lon": 145.124359,
+                                    "distance": 0
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v2/disruptions/modes/{modes}": {
+            "get": {
+                "summary": "Disruptions",
+                "tags": [
+                    "General"
+                ],
+                "description": "The Disruptions API returns information on planned and unplanned disruptions for selected modes of transport.\n\n**Note** The disruption information provided is the same information that is made available by PTV through its digital channels; it is not an exhaustive list of all disruptions affecting public transport.\n\n### Response\n\nReturns a list of JSON mode objects – i.e. objects named after the possible transport modes\nwhich are passed: a `general` object, a `metro-bus` object, a `metro-train` object, a `metro-tram`\nobject, a `regional-bus` object, a `regional-coach` object and a `regional-train` object.\n\nEach of these mode objects has a collection of disruption information objects within it (or, it\nmay be empty if there is no disruption information at the time of the request).\n",
+                "parameters": [
+                    {
+                        "name": "modes",
+                        "in": "path",
+                        "type": "string",
+                        "description": "A comma separated list of modes of transport for which disruption information is returned; possible values are:\n\ngeneral\nmetro-bus\nmetro-train\nmetro-tram\nregional-bus\nregional-coach\nregional-train\n\nWhere “general” represents disruption information affecting two or more modes\n\ne.g. “regional-train,regional-coach” would return planned disruption information\nfor V/Line rail and coach services\n",
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/parameters/devid"
+                    },
+                    {
+                        "$ref": "#/parameters/signature"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "title": "DisruptionsResponse",
+                            "type": "object",
+                            "properties": {
+                                "general": {
+                                    "$ref": "#/definitions/disruptions"
+                                },
+                                "metro-train": {
+                                    "$ref": "#/definitions/disruptions"
+                                },
+                                "metro-tram": {
+                                    "$ref": "#/definitions/disruptions"
+                                },
+                                "metro-bus": {
+                                    "$ref": "#/definitions/disruptions"
+                                },
+                                "regional-train": {
+                                    "$ref": "#/definitions/disruptions"
+                                },
+                                "regional-coach": {
+                                    "$ref": "#/definitions/disruptions"
+                                },
+                                "regional-bus": {
+                                    "$ref": "#/definitions/disruptions"
+                                }
+                            },
+                            "example": {
+                                "metro-train": [
+                                    {
+                                        "title": "Buses replacing trains on the Cranbourne and Pakenham lines after 8.45pm: Saturday 15 February 2014",
+                                        "url": "http://ptv.vic.gov.au/disruptions/buses-replacing-trains-on-thecranbourne-and-pakenham-lines-after-8-45pm-saturday-15-february-2014/",
+                                        "description": "Due to signalling upgrades and construction work as part of the Springvale Level Crossing Removal, buses will replace all trains between Westall and Dandenong after 8.45pm on Saturday 15 February.",
+                                        "publishedOn": "2014-01-29T23:30:54.000Z"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
