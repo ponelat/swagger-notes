@@ -59,13 +59,11 @@
         },
         "lat": {
             "description": "latitude in decimal degrees, eg -37.82005",
-            "type": "number",
-            "example": -37.82005
+            "type": "number"
         },
         "lon": {
             "description": "longitude in decimal degrees, eg 144.959047",
-            "type": "number",
-            "example": 144.959047
+            "type": "number"
         },
         "stop_id": {
             "type": "integer",
@@ -193,28 +191,15 @@
                 "lon",
                 "distance",
                 "stop_id"
-            ],
-            "example": {
-                "result": {
-                    "suburb": "East Melbourne",
-                    "transport_type": "tram",
-                    "stop_id": 2825,
-                    "location_name": "Clarendon St/Wellington Pde #11",
-                    "lat": -37.81603,
-                    "lon": 144.9824,
-                    "distance": 0.00000408647838
-                }
-            }
+            ]
         },
         "line_id": {
             "type": "string",
-            "description": "(numeric string) the unique identifier of each line",
-            "example": 1818
+            "description": "(numeric string) the unique identifier of each line"
         },
         "line_name": {
             "type": "string",
-            "description": "the name of the line.",
-            "example": "970 - City - Frankston - Mornington - Rosebud via Nepean Highway & Frankston Station"
+            "description": "the name of the line."
         },
         "line_number": {
             "type": "string",
@@ -305,13 +290,11 @@
                 },
                 "destination_id": {
                     "type": "integer",
-                    "description": "The stop_id of the destination, i.e. the last stop for the run",
-                    "example": 1044
+                    "description": "The stop_id of the destination, i.e. the last stop for the run"
                 },
                 "destination_name": {
                     "type": "string",
-                    "description": "The location_name of the destination, i.e. the last stop for the run",
-                    "example": "Craigieburn"
+                    "description": "The location_name of the destination, i.e. the last stop for the run"
                 }
             },
             "required": [
@@ -328,14 +311,12 @@
                 "time_table_utc": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "the scheduled time of the service at the stop, in ISO 8601 UTC",
-                    "example": "2014-11-18T03:21:00Z"
+                    "description": "the scheduled time of the service at the stop, in ISO 8601 UTC"
                 },
                 "time_realtime_utc": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "the real-time of the service at the stop if this is available, in ISO 8601 UTC. Available for trams and some bus routes; if the relevant feed system is not available, it will return null",
-                    "example": "2014-11-18T03:24:00Z"
+                    "description": "the real-time of the service at the stop if this is available, in ISO 8601 UTC. Available for trams and some bus routes; if the relevant feed system is not available, it will return null"
                 },
                 "flags": {
                     "$ref": "#/definitions/flags"
@@ -372,24 +353,20 @@
             "properties": {
                 "title": {
                     "type": "string",
-                    "description": "a headline or title summarising the disruption information",
-                    "example": "Buses replacing trains on the Cranbourne and Pakenham lines after 8.45pm: Saturday 15 February 2014"
+                    "description": "a headline or title summarising the disruption information"
                 },
                 "url": {
                     "type": "string",
-                    "description": "the url of the relevant article on the PTV website",
-                    "example": "http://ptv.vic.gov.au/disruptions/buses-replacing-trains-on-thecranbourne-and-pakenham-lines-after-8-45pm-saturday-15-february-2014/"
+                    "description": "the url of the relevant article on the PTV website"
                 },
                 "description": {
                     "type": "string",
-                    "description": "a truncated version of the description of the disruption that appears on the PTV website",
-                    "example": "Due to signalling upgrades and construction work as part of the Springvale Level Crossing Removal, buses will replace all trains between Westall and Dandenong after 8.45pm on Saturday 15 February."
+                    "description": "a truncated version of the description of the disruption that appears on the PTV website"
                 },
                 "publishedOn": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "the date and time the disruption information is published on the PTV website, in ISO 8601 UTC format",
-                    "example": "“2014-01-29T23:30:54Z"
+                    "description": "the date and time the disruption information is published on the PTV website, in ISO 8601 UTC format"
                 }
             }
         },
@@ -404,44 +381,7 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/timetable_value"
-                    },
-                    "example": [
-                        {
-                            "platform": {
-                                "realtime_id": 0,
-                                "stop": {
-                                    "suburb": "East Melbourne",
-                                    "transport_type": "train",
-                                    "stop_id": 1104,
-                                    "location_name": "Jolimont-MCG",
-                                    "lat": -37.81653,
-                                    "lon": 144.9841,
-                                    "distance": 0
-                                },
-                                "direction": {
-                                    "linedir_id": 41,
-                                    "direction_id": 8,
-                                    "direction_name": "Hurstbridge",
-                                    "line": {
-                                        "transport_type": "train",
-                                        "line_id": 8,
-                                        "line_name": "Hurstbridge",
-                                        "line_number": "Hurstbridge"
-                                    }
-                                }
-                            },
-                            "run": {
-                                "transport_type": "train",
-                                "run_id": 21172,
-                                "num_skipped": 0,
-                                "destination_id": 1041,
-                                "destination_name": "Clifton Hill"
-                            },
-                            "time_timetable_utc": "2014-01-20T03:21:00.000Z",
-                            "time_realtime_utc": null,
-                            "flags": null
-                        }
-                    ]
+                    }
                 }
             }
         }
@@ -728,27 +668,7 @@
                                 "totalLocations",
                                 "clusters",
                                 "locations"
-                            ],
-                            "example": {
-                                "minLat": -37.81959,
-                                "minLong": 144.979126,
-                                "maxLat": -37.8157463,
-                                "maxLong": 144.9854,
-                                "weightedLat": -37.81671,
-                                "weightedLong": 144.982849,
-                                "totalLocations": 7,
-                                "locations": [
-                                    {
-                                        "suburb": "Melbourne City",
-                                        "transport_type": "tram",
-                                        "stop_id": 2171,
-                                        "location_name": "7B-Rod Laver Arena/Melbourne Park",
-                                        "lat": -37.81959,
-                                        "lon": 144.979126,
-                                        "distance": 0
-                                    }
-                                ]
-                            }
+                            ]
                         }
                     }
                 }
@@ -784,30 +704,7 @@
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/searchresult"
-                            },
-                            "example": [
-                                {
-                                    "type": "line",
-                                    "result": {
-                                        "transport_type": "tram",
-                                        "line_id": 5313,
-                                        "line_name": "Route 31 - Hoddle Street - Victoria Harbour Docklands",
-                                        "line_number": "Route 31"
-                                    }
-                                },
-                                {
-                                    "type": "stop",
-                                    "result": {
-                                        "suburb": "East Melbourne",
-                                        "transport_type": "tram",
-                                        "stop_id": 2825,
-                                        "location_name": "Clarendon St/Wellington Pde #11",
-                                        "lat": -37.81603,
-                                        "lon": 144.9824,
-                                        "distance": 0.00000408647838
-                                    }
-                                }
-                            ]
+                            }
                         }
                     }
                 }
@@ -893,44 +790,7 @@
                                     "type": "array",
                                     "items": {
                                         "$ref": "#/definitions/timetable_value"
-                                    },
-                                    "example": [
-                                        {
-                                            "platform": {
-                                                "realtime_id": 0,
-                                                "stop": {
-                                                    "suburb": "East Melbourne",
-                                                    "transport_type": "train",
-                                                    "stop_id": 1104,
-                                                    "location_name": "Jolimont-MCG",
-                                                    "lat": -37.81653,
-                                                    "lon": 144.9841,
-                                                    "distance": 0
-                                                }
-                                            },
-                                            "direction": {
-                                                "linedir_id": 38,
-                                                "direction_id": 5,
-                                                "direction_name": "South Morang",
-                                                "line": {
-                                                    "transport_type": "train",
-                                                    "line_id": 5,
-                                                    "line_name": "South Morang",
-                                                    "line_number": "South Morang"
-                                                }
-                                            },
-                                            "run": {
-                                                "transport_type": "train",
-                                                "run_id": 13975,
-                                                "num_skipped": 0,
-                                                "destination_id": 1224,
-                                                "destination_name": "South Morang"
-                                            },
-                                            "time_timetable_utc": "2014-01-20T03:21:00.000Z",
-                                            "time_realtime_utc": null,
-                                            "flags": ""
-                                        }
-                                    ]
+                                    }
                                 }
                             }
                         }
@@ -1092,44 +952,7 @@
                                     "type": "array",
                                     "items": {
                                         "$ref": "#/definitions/timetable_value"
-                                    },
-                                    "example": [
-                                        {
-                                            "platform": {
-                                                "realtime_id": 0,
-                                                "stop": {
-                                                    "suburb": "Melbourne City",
-                                                    "transport_type": "train",
-                                                    "stop_id": 1071,
-                                                    "location_name": "Flinders Street",
-                                                    "lat": -37.81831,
-                                                    "lon": 144.966965,
-                                                    "distance": 0
-                                                },
-                                                "direction": {
-                                                    "linedir_id": 0,
-                                                    "direction_id": 8,
-                                                    "direction_name": "Hurstbridge",
-                                                    "line": {
-                                                        "transport_type": "train",
-                                                        "line_id": 8,
-                                                        "line_name": "Hurstbridge",
-                                                        "line_number": "Hurstbridge"
-                                                    }
-                                                }
-                                            },
-                                            "run": {
-                                                "transport_type": "train",
-                                                "run_id": 21173,
-                                                "num_skipped": 0,
-                                                "destination_id": 0,
-                                                "destination_name": null
-                                            },
-                                            "time_timetable_utc": "2014-01-20T03:19:00.000Z",
-                                            "time_realtime_utc": null,
-                                            "flags": null
-                                        }
-                                    ]
+                                    }
                                 }
                             }
                         }
@@ -1166,18 +989,7 @@
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/stop"
-                            },
-                            "example": [
-                                {
-                                    "suburb": "Plenty",
-                                    "transport_type": "bus",
-                                    "stop_id": 28066,
-                                    "location_name": "200 Yan Yean Rd",
-                                    "lat": -37.6616554,
-                                    "lon": 145.124359,
-                                    "distance": 0
-                                }
-                            ]
+                            }
                         }
                     }
                 }
@@ -1233,16 +1045,6 @@
                                 "regional-bus": {
                                     "$ref": "#/definitions/disruptions"
                                 }
-                            },
-                            "example": {
-                                "metro-train": [
-                                    {
-                                        "title": "Buses replacing trains on the Cranbourne and Pakenham lines after 8.45pm: Saturday 15 February 2014",
-                                        "url": "http://ptv.vic.gov.au/disruptions/buses-replacing-trains-on-thecranbourne-and-pakenham-lines-after-8-45pm-saturday-15-february-2014/",
-                                        "description": "Due to signalling upgrades and construction work as part of the Springvale Level Crossing Removal, buses will replace all trains between Westall and Dandenong after 8.45pm on Saturday 15 February.",
-                                        "publishedOn": "2014-01-29T23:30:54.000Z"
-                                    }
-                                ]
                             }
                         }
                     }
