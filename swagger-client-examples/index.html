@@ -1,0 +1,17 @@
+<script src='./node_modules/swagger-client/browser/swagger-client.js' type='text/javascript'></script>
+<script type="text/javascript">
+  // initialize swagger, point to a resource listing
+  window.swagger = new SwaggerClient({
+    url: "http://petstore.swagger.io/api/api-docs",
+    success: function() {
+      // upon connect, fetch a pet and set contents to element "mydata"
+      swagger.apis.pet.getPetById({petId:1},{responseContentType: 'application/json'}, function(data) {
+        document.getElementById("mydata").innerHTML = JSON.stringify(data.obj);
+      });
+    }
+  });
+</script>
+
+<body>
+  <div id="mydata"></div>
+</body>
