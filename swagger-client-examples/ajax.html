@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Swagger client</title>
+
+  <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
+
+  <style>
+  .block{
+    float: left;
+    position: relative;
+    width: 50%;
+    overflow: auto;
+  }
+  </style>
+
+</head>
+<body>
+  <h4>Result: <span id='status'></span></h4>
+  <div class="block">
+    <h4>Request:</h4>
+    <pre id="request"></pre>
+  </div>
+  <div class="block">
+    <h4>Response:</h4>
+    <pre id="response"></pre>
+  </div>
+  <div class="block">
+    <h4>statusText</h4>
+    <pre id="status-text"></pre>
+  </div>
+
+
+<script>
+
+var $status = $('#status');
+
+$.support.cors = true;
+var xhr = $.ajax({
+
+  url: 'http://ponelat.com:3100/base.json',
+  method: 'get',
+  xhrFields: {withCredentials: true},
+  success: function(){
+    $('#status-text').text(xhr.responseText);
+    console.log('success');
+    $status.html('Success');
+  },
+  beforeSend: function() {
+    $('#request').text(JSON.stringify(this, null, 2));
+    console.log('before',this);
+  },
+  fail: function() {
+    console.log('success');
+    $status.html('Success');
+  }
+
+}).always(function() {
+  $('#response').text(JSON.stringify(xhr.getAllResponseHeaders()));
+  console.log(xhr);
+});
+
+</script>
+
+</body>
+</html>
