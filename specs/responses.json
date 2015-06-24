@@ -1,0 +1,136 @@
+{
+  "swagger": "2.0",
+  "host": "petstore.swagger.wordnik.com",
+  "info": {
+      "title": "swagger-ui#",
+      "title": "Describe your issue here",
+      "version": "1.0.0"
+  },
+  "paths": {
+      "/ref/primitive": {
+          "get": {
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "schema": {
+                        "$ref": "#/definitions/TestPrimitive"
+                      }
+                  }
+              }
+          }
+      },
+      "/ref/model": {
+          "get": {
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "schema": {
+                        "$ref": "#/definitions/TestModel"
+                      }
+                  }
+              }
+          }
+      },
+      "/inline/model": {
+          "get": {
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "bar": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                  }
+              }
+          }
+      },
+      "/inline/primitive": {
+          "get": {
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "schema": {
+                        "type": "number"
+                      }
+                  }
+              }
+          }
+      },
+      "/secondary": {
+          "get": {
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "schema": {
+                        "type": "string"
+                      }
+                  },
+                  "201": {
+                      "description": "Inline Model",
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                  },
+                  "301": {
+                      "description": "$ref Model",
+                      "schema": {
+                        "$ref": "#/definitions/TestModel"
+                      }
+                  },
+                  "401": {
+                      "description": "Inline Primitive",
+                      "schema": {
+                        "type": "number"
+                      }
+                  },
+                  "501": {
+                      "description": "$ref Primitive",
+                      "schema": {
+                        "$ref": "#/definitions/TestPrimitive"
+                      }
+                  },
+                  "502": {
+                      "description": "empty schema + headers",
+                      "headers": {
+                        "x-awsome-header": {
+                          "description": "Cool header",
+                          "type": "string"
+                        },
+                        "x-another-awsome-header": {
+                          "description": "Brilliant header",
+                          "type": "string"
+                        }
+                      }
+                  }
+              }
+          }
+      }
+  },
+
+  "definitions": {
+    "TestPrimitive": {
+      "type": "number"
+    },
+    "TestModel": {
+      "type": "object",
+      "properties": {
+        "foo": {
+          "type": "number"
+        }
+      }
+    }
+  }
+
+}
