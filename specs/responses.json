@@ -7,6 +7,36 @@
       "version": "1.0.0"
   },
   "paths": {
+      "/application\/json": {
+          "get": {
+              "responses": {
+                  "200": {
+                      "description": "Has application\/json as a key in the example",
+                      "examples": {
+                        "application\/json": [ "hello" ]
+                      },
+                      "schema": {
+                        "$ref": "#/definitions/TestModel"
+                      }
+                  }
+              }
+          }
+      },
+      "/application\/json-string": {
+          "get": {
+              "responses": {
+                  "200": {
+                      "description": "Has application\/json as a key in the example, raw string",
+                      "examples": {
+                        "application\/json": "\n[ hello \n]"
+                      },
+                      "schema": {
+                        "$ref": "#/definitions/TestModel"
+                      }
+                  }
+              }
+          }
+      },
       "/ref/primitive": {
           "get": {
               "responses": {
