@@ -1,0 +1,11 @@
+---
+swagger: "2.0"
+schemes:
+  - http
+paths:
+  /some:
+    options:
+      tags:
+        - /api
+      summary: summary.
+      description: Description.
