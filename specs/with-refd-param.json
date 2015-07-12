@@ -1,0 +1,31 @@
+{
+  "swagger": "2.0",
+  "host": "ponelat.com",
+  "info": {
+      "title": "Multiple API Calls",
+      "title": "Multiple calls to this spec, due to parameter resolution",
+      "version": "1.0.0"
+  },
+  "paths": {
+      "/road": {
+          "get": {
+              "parameters": [{
+                "$ref": "#/parameters/some"
+              }],
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "schema": { "type": "string" }
+                  }
+              }
+          }
+      }
+  },
+  "parameters": {
+    "some": {
+      "name": "test",
+      "in": "query",
+      "type": "string"
+    }
+  }
+}
