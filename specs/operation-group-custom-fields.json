@@ -1,0 +1,17 @@
+{
+    "swagger": "2.0",
+    "paths": {
+        "/endpoint1": {
+            "x-order": 1,
+            "get": {
+                "x-another": "abc"
+            }
+        },
+        "/endpoint2": {
+            "x-order": 2,
+            "get": {
+                "x-another": "def"
+            }
+        }
+    }
+}
