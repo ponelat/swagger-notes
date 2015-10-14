@@ -1,0 +1,68 @@
+{
+  "swagger": "2.0",
+  "host": "petstore.swagger.wordnik.com",
+  "info": {
+      "title": "swagger-ui#",
+      "title": "Describe your issue here",
+      "version": "1.0.0"
+  },
+  "paths": {
+    "\/api\/MyDetails\/PendingRequests\/{idRequest}": {
+      "post": {
+        "tags": [
+          "Member"
+        ],
+        "operationId": "Member_ApproveRequest",
+        "consumes": [
+          "application\/json",
+          "text\/json",
+          "application\/xml",
+          "text\/xml",
+          "application\/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application\/json",
+          "text\/json",
+          "application\/xml",
+          "text\/xml"
+        ],
+        "parameters": [
+          {
+            "name": "idRequest",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "authorisation",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#\/definitions\/TestModel"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "TestModel": {
+      "properties": {
+          "someProp": {
+            "type": "string"
+          }
+      },
+      "type": "object"
+    }
+  }
+}
